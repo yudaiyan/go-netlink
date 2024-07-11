@@ -29,3 +29,16 @@ func GetLocalInterface(ifname string) (ip net.IP, mask net.IPMask, mac net.Hardw
 	}
 	return addrs[0].IPNet.IP, addrs[0].IPNet.Mask, link.Attrs().HardwareAddr, nil
 }
+
+// 根据网卡名，获取网卡的mac。
+func GetMac(ifname string) (mac net.HardwareAddr, err error) {
+	defer func() {
+		log.Printf("获取本地网卡%s: [mac=%s]", ifname, mac)
+	}()
+
+	link, err := netlink.LinkByName(ifname)
+	if err != nil {
+		return
+	}
+	return link.Attrs().HardwareAddr, nil
+}

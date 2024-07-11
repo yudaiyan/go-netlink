@@ -25,3 +25,24 @@ func TestGetLocalInterface(t *testing.T) {
 		})
 	}
 }
+
+func TestGetMac(t *testing.T) {
+	type args struct {
+		ifname string
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		{name: "Test1", args: args{ifname: "eth0"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			_, err := GetMac(tt.args.ifname)
+			if err != nil {
+				t.Errorf("GetMac() error = %v", err)
+				return
+			}
+		})
+	}
+}
