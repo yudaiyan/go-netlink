@@ -46,3 +46,25 @@ func TestGetMac(t *testing.T) {
 		})
 	}
 }
+
+func TestAddrAddToLo(t *testing.T) {
+	cidr, err := RandAddrAdd("lo")
+	if err != nil {
+		t.Errorf("AddrAdd() error = %v", err)
+		return
+	}
+	t.Log(cidr)
+	err = AddrDel("lo", cidr.String())
+	if err != nil {
+		t.Errorf("AddrDel() error = %v", err)
+		return
+	}
+}
+
+func TestLoAddrClear(t *testing.T) {
+	err := LoAddrClear()
+	if err != nil {
+		t.Errorf("LoAddrClear() error = %v", err)
+		return
+	}
+}
