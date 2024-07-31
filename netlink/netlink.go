@@ -3,6 +3,7 @@ package netlink
 import (
 	"crypto/rand"
 	"fmt"
+	"log"
 	"net"
 )
 
@@ -107,5 +108,6 @@ func RandAddrAdd(iface string) (out *net.IPNet, err error) {
 }
 
 func noImplemention() error {
-	return fmt.Errorf("no implemention")
+	log.Println("no implemention")
+	return nil
 }
